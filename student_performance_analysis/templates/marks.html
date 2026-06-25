@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+<main class="grid grid-single">
+  <section class="card">
+    <h2>Marks Update App</h2>
+    <p class="muted">Update students' <span class="mono">previous_scores</span> (0–100) and save.</p>
+
+    {% if saved %}
+    <div class="alert">
+      Marks updated and saved to <span class="mono">school.db</span> and <span class="mono">students.csv</span>.
+    </div>
+    {% endif %}
+
+    <form method="POST" action="{{ url_for('marks') }}">
+      <div class="table-wrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Reg No</th>
+              <th>Student Name</th>
+              <th>Previous Marks</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for s in students %}
+            <tr>
+              <td class="mono">{{ s.reg_no }}</td>
+              <td>{{ s.student_name }}</td>
+              <td>
+                <input
+                  class="table-input"
+                  type="number"
+                  step="0.1"
+                  min="0"
+                  max="100"
+                  name="prev_{{ s.reg_no }}"
+                  value="{{ "%.2f"|format(s.previous_scores) }}"
+                  required
+                />
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <button class="btn" type="submit">Save Marks</button>
+    </form>
+  </section>
+</main>
+{% endblock %}
+

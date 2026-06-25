@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<main class="grid grid-single">
+  <section class="card">
+    <h2>Staff Signup</h2>
+    <p class="muted">Create a new staff account to access Dashboard, Attendance, and Marks Update.</p>
+
+    {% if error %}
+    <div class="alert alert-error">
+      <strong>Error:</strong> {{ error }}
+    </div>
+    {% endif %}
+
+    <form class="form" method="POST" action="{{ url_for('staff_signup') }}">
+      <div class="form-row">
+        <label for="username">Username</label>
+        <input id="username" name="username" type="text" placeholder="e.g. staff01" required />
+      </div>
+      <div class="form-row">
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" placeholder="Minimum 6 characters" required />
+      </div>
+      <div class="form-row">
+        <label for="confirm_password">Confirm password</label>
+        <input id="confirm_password" name="confirm_password" type="password" required />
+      </div>
+      <button class="btn" type="submit">Create account</button>
+    </form>
+
+    <p class="muted" style="margin-top: 12px;">
+      Already have an account? <a class="link" href="{{ url_for('staff_login') }}">Login here</a>.
+    </p>
+  </section>
+</main>
+{% endblock %}
+

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<main class="grid grid-single">
+  <section class="card">
+    <h2>Dashboard</h2>
+    <p class="muted">Welcome, <strong>{{ current_user.username }}</strong>.</p>
+
+    <div class="kpi-grid">
+      <div class="kpi">
+        <div class="kpi-label">Students</div>
+        <div class="kpi-value">{{ stats.students_count }}</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Attendance Records</div>
+        <div class="kpi-value">{{ stats.attendance_count }}</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Model</div>
+        <div class="kpi-value kpi-small">{{ stats.model_type or "—" }}</div>
+        {% if stats.r2 is not none %}
+        <div class="kpi-sub muted"><span class="mono">R²</span>: {{ "%.3f"|format(stats.r2) }} • <span class="mono">MAE</span>: {{ "%.2f"|format(stats.mae) }}</div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="actions">
+      <a class="btn btn-secondary" href="{{ url_for('attendance') }}">Open Attendance App</a>
+      <a class="btn btn-secondary" href="{{ url_for('marks') }}">Open Marks Update App</a>
+    </div>
+  </section>
+</main>
+{% endblock %}
+

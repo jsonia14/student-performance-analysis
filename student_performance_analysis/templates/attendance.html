@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+<main class="grid grid-single">
+  <section class="card">
+    <h2>Attendance App</h2>
+    <p class="muted">Select a date, then tick Present and save.</p>
+
+    <form class="toolbar" method="GET" action="{{ url_for('attendance') }}">
+      <div class="form-row">
+        <label for="date">Date</label>
+        <input id="date" name="date" type="date" value="{{ date }}" />
+      </div>
+      <button class="btn btn-secondary" type="submit">Load</button>
+    </form>
+
+    {% if saved %}
+    <div class="alert">
+      Attendance saved for <span class="mono">{{ date }}</span>.
+    </div>
+    {% endif %}
+
+    <form method="POST" action="{{ url_for('attendance') }}">
+      <input type="hidden" name="date" value="{{ date }}" />
+      <div class="table-wrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Reg No</th>
+              <th>Student Name</th>
+              <th>Present</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for s in students %}
+            <tr>
+              <td class="mono">{{ s.reg_no }}</td>
+              <td>{{ s.student_name }}</td>
+              <td>
+                <input
+                  type="checkbox"
+                  name="present_{{ s.reg_no }}"
+                  {% if existing.get(s.reg_no, 0) == 1 %}checked{% endif %}
+                />
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <button class="btn" type="submit">Save Attendance</button>
+    </form>
+  </section>
+</main>
+{% endblock %}
+

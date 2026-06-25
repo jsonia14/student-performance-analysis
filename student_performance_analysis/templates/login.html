@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<main class="grid grid-single">
+  <section class="card">
+    <h2>Staff Login</h2>
+    <p class="muted">
+      Default credentials (first run): <span class="mono">admin</span> / <span class="mono">admin123</span>
+    </p>
+
+    {% if message %}
+    <div class="alert">
+      {{ message }}
+    </div>
+    {% endif %}
+
+    {% if error %}
+    <div class="alert alert-error">
+      <strong>Error:</strong> {{ error }}
+    </div>
+    {% endif %}
+
+    <form class="form" method="POST" action="{{ url_for('staff_login') }}">
+      <div class="form-row">
+        <label for="username">Username</label>
+        <input id="username" name="username" type="text" placeholder="admin" required />
+      </div>
+      <div class="form-row">
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" placeholder="••••••••" required />
+      </div>
+      <button class="btn" type="submit">Login</button>
+    </form>
+
+    <p class="muted" style="margin-top: 12px;">
+      New staff? <a class="link" href="{{ url_for('staff_signup') }}">Create an account</a>.
+    </p>
+  </section>
+</main>
+{% endblock %}
+

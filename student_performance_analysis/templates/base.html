@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ title or "Student Performance Portal" }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-title">Student Performance Portal</div>
+          <div class="brand-sub">Prediction • Attendance • Marks</div>
+        </div>
+
+        <nav class="nav">
+          <a class="nav-link" href="{{ url_for('index') }}">Home</a>
+          {% if current_user and current_user.is_authenticated %}
+          <a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a>
+          <a class="nav-link" href="{{ url_for('attendance') }}">Attendance</a>
+          <a class="nav-link" href="{{ url_for('marks') }}">Marks Update</a>
+          <a class="nav-link nav-link-strong" href="{{ url_for('staff_logout') }}">Logout</a>
+          {% else %}
+          <a class="nav-link" href="{{ url_for('staff_signup') }}">Staff Signup</a>
+          <a class="nav-link nav-link-strong" href="{{ url_for('staff_login') }}">Staff Login</a>
+          {% endif %}
+        </nav>
+      </header>
+
+      {% block content %}{% endblock %}
+
+      <footer class="footer">
+        <div class="muted">
+          Dataset: <span class="mono">students.csv</span> • Model: <span class="mono">model.pkl</span> • DB:
+          <span class="mono">school.db</span>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
+
