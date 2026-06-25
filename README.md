@@ -76,25 +76,6 @@ Features analyzed include:
 - Problem Solving
 - Python Programming
 
----
-
-## 📷 Sample Visualizations
-
-Upload your charts inside an **images** folder and add them below:
-
-### Performance Analysis
-
-![Performance Chart](images/chart1.png)
-
-### Student Score Distribution
-
-![Distribution Chart](images/chart2.png)
-
-### Subject-wise Analysis
-
-![Subject Analysis](images/chart3.png)
-
----
 
 
 
